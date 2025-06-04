@@ -43,7 +43,7 @@ test('POST /todos - should create a new todo', async ({ request }) => {
   const newTodo = {
     todo: 'Write Playwright API test',
     completed: false,
-    userId: 5, // userId mora biti broj koji postoji (1–30)
+    userId: 5, 
   };
 
   const response = await request.post('/todos/add', {
