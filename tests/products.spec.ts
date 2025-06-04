@@ -43,3 +43,35 @@ test('POST /products/add - should create a new product', async ({ request }) => 
 
 
 });
+
+test('PUT - should update a product', async ({ request }) => {
+  const updatedData = {
+    title: 'Updated Product Title',
+    price: 99.99,
+  };
+
+  const response = await request.put('/products/1', {
+    data: updatedData,
+  });
+
+  expect(response.ok()).toBeTruthy();
+  expect(response.status()).toBe(200);
+
+  const updatedProduct = await response.json();
+  expect(updatedProduct.title).toBe(updatedData.title);
+  expect(updatedProduct.price).toBe(updatedData.price);
+});
+
+test('GET - should return 404 for invalid ID', async ({ request }) => {
+  const response = await request.get('/products/99999');
+  expect(response.status()).toBe(404);
+});
+
+test('GET /products - should return paginated products', async ({ request }) => {
+  const response = await request.get('/products?limit=5&skip=10');
+  expect(response.ok()).toBeTruthy();
+
+  const result = await response.json();
+  expect(result.products.length).toBeLessThanOrEqual(5);
+  expect(result.skip).toBe(10);
+});
