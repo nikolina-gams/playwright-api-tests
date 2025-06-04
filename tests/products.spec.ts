@@ -41,5 +41,5 @@ test('POST /products/add - should create a new product', async ({ request }) => 
   expect(createdProduct.category).toBe(newProduct.category);
   expect(createdProduct.brand).toBe(newProduct.brand);
 
-  console.log('Created Product:', createdProduct);
+
 });
