@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Playwright
+      - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
       - name: Run tests
@@ -38,13 +38,13 @@ jobs:
         if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.your-email-provider.com
+          server_address: smtp.gmail.com
           server_port: 465
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "Playwright Tests Failed - Merge to Main"
           to: nikolina.gams5@gmail.com
-          from: CI <ci@yourdomain.com>
+          from: CI <nikolina.gams5@gmail.com>
           body: |
             Tests failed after merge to main.
             Repo: ${{ github.repository }}
